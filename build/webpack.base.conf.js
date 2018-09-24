@@ -8,16 +8,14 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js'//入口js文件 编译打包从这里开始
   },
-  output: {
+  output: {//输出
     path: config.build.assetsRoot,
-    filename: '[name].js',
+    filename: '[name].js',//输出js文件的名字 app.js的由来
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath

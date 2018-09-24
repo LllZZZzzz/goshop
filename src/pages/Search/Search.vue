@@ -1,17 +1,17 @@
 <template>
-  <div class="search">
-    <HeaderTop title="搜索"></HeaderTop>
+  <section class="search">
+    <HeaderTop title="搜索"/>
     <form class="search_form" @submit.prevent="search">
       <input type="search" placeholder="请输入商家名称" class="search_input" v-model="keyword">
       <input type="submit" class="search_submit">
     </form>
-    <div class="list"><!-- v-if="searchShops.length"-->
+   <section class="list" v-if="searchShops.length">
       <ul class="list_container">
-        <!--<router-link :to="{path:'/shop', query:{id:item.id}}" tag="li" v-for="item in searchShops" :key="item.id" class="list_li">-->
-          <div class="item_left">
-            <!--<img :src="imgBaseUrl + item.image_path" class="restaurant_img">-->
-          </div>
-          <!--<div class="item_right">
+        <router-link :to="{path:'/shop', query:{id:item.id}}" tag="li" v-for="item in searchShops" :key="item.id" class="list_li">
+          <section class="item_left">
+            <img :src="imgBaseUrl + item.image_path" class="restaurant_img">
+          </section>
+          <section class="item_right">
             <div class="item_right_text">
               <p>
                 <span>{{item.name}}</span>
@@ -19,27 +19,55 @@
               <p>月售 {{item.month_sales||item.recent_order_num}} 单</p>
               <p>{{item.delivery_fee||item.float_minimum_order_amount}} 元起送 / 距离{{item.distance}}</p>
             </div>
-          </div>-->
-       <!-- </router-link>-->
+          </section>
+        </router-link>
       </ul>
-    </div>
-
+    </section>
     <div class="search_none" v-if="emptyResult">很抱歉！无搜索结果</div>
-  </div>
+  </section>
 </template>
-
 <script>
-  import HeaderTop from '../../components/HeaderTop/HeaderTop'
-    export default {
-      components:{
-        HeaderTop
-      },
-        name: ""
+  import {mapState} from 'vuex'
+  import HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
+  export default {
+    data () {
+      return {
+        emptyResult: false,
+        imgBaseUrl: 'http://cangdu.org:8001/img/',
+        keyword: ''
+      }
+    },
+
+    computed: {
+      ...mapState(['searchShops'])
+    },
+    methods: {
+      search () {
+        const keyword = this.keyword.trim()
+        if(keyword) {
+          /*每次在搜索前设置不显示*/
+          this.emptyResult = false
+          this.$store.dispatch('searchShop', keyword)
+        }
+      }
+    },
+    watch: {
+      searchShops (val) {
+        /*搜索结果为空显示*/
+        if(!val.length) {
+          this.emptyResult = true
+        }
+      }
+    },
+    components: {
+      HeaderTop
     }
+  }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixins.styl"
+
   .search
     width 100%
     height 100%

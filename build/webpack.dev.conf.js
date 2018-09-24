@@ -29,7 +29,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ],
     },
     hot: true,
-    contentBase: false, // since we use CopyWebpackPlugin.
+    contentBase: false, // since we use CopyWebpackPlugin.//webpack-dev-server服务于根目录下的index.html
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
@@ -44,7 +44,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     }
   },
-  plugins: [
+  plugins: [//webpack用到的一些插件
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
@@ -54,7 +54,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
+      template: 'index.html',/*以index.html作为模板，插入编译好的js文件*/
       inject: true
     }),
     // copy custom static assets

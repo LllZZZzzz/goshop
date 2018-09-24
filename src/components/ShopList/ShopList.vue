@@ -1,11 +1,11 @@
 <template>
   <div class="shop_container">
-    <!--<ul class="shop_list" v-if="shops.length">
-      <router-link class="shop_li border-1px"
-                   tag='li'
-                   to="/shop"
+    <ul class="shop_list" v-if="shops.length">
+      <li class="shop_li border-1px"
                    v-for="(item, index) in shops"
-                   :key="index">
+                   :key="index"
+                   @click="$router.push('/shop')"
+      >
         <a>
           <div class="shop_left">
             <img class="shop_img" :src="imgBaseUrl + item.image_path">
@@ -40,20 +40,32 @@
             </section>
           </div>
         </a>
-      </router-link>
+      </li>
     </ul>
     <ul v-else>
       <li v-for="item in 10" :key="item">
         <img src="./images/shop_back.svg">
       </li>
-    </ul>-->
-    计划vu激活码你不要几乎每年
+    </ul>
   </div>
 </template>
 
 <script>
+  import {mapState} from "vuex"
+  import Star from "../star/Star"
     export default {
-        name: ""
+    data(){
+      return {
+        imgBaseUrl: 'http://cangdu.org:8001/img/'
+      }
+    },
+      name: "",
+      computed: {
+        ...mapState(['shops'])
+      },
+      components:{
+      Star
+      }
     }
 </script>
 
@@ -61,7 +73,9 @@
   @import "../../common/stylus/mixins.styl"
   .shop_container
     margin-bottom 50px
+    overflow auto
     .shop_list
+      overflow auto
       .shop_li
         bottom-border-1px(#f1f1f1)
         width 100%

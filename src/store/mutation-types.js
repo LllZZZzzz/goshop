@@ -1,0 +1,12 @@
+export const RECEIVE_ADDRESS = 'receive_address' // 接收地址信息
+export const RECEIVE_CATEGORYS = 'receive_categorys' // 接收分类数组
+export const RECEIVE_SHOPS = 'receive_shops' // 接收商家数组
+export const RECEIVE_USER_INFO='receive_user_info';//接受用户信息
+export const LOGOUT_USER_INFO='logout_user_info'//用户登出
+export const RECEIVE_SHOP_INFO='receive_shop_info'//商铺信息
+export const RECEIVE_SHOP_GOODS='receive_shop_goods'//商铺商品信息
+export const RECEIVE_SHOP_RATINGS='receive_shop_ratings'//商铺评论
+export const INCRMENT_FOOD_COUNT='incrment_food_count'//增加商品数量
+export const DECRMENT_FOOD_COUNT='decrment_food_count'//减少商品数量
+export const CLEARCART='clearcart'//清空购物车
+export const SEARCHSHOP='searchshop'//查找商铺
